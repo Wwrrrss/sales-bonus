@@ -61,7 +61,7 @@ function analyzeSalesData(data, options) {
 
     const sellerIndex = Object.fromEntries(sellerStats.map(item => [item.id, item]));
 
-    const productIndex = Object.fromEntries(data.products.map(item => [item.ID, item]));
+    const productIndex = Object.fromEntries(data.products.map(item => [item.sku, item]));
 
     data.purchase_records.forEach(record => {
         const seller = sellerIndex[record.seller_id];
@@ -70,7 +70,7 @@ function analyzeSalesData(data, options) {
 
         record.items.forEach(item => {
             const product = productIndex[item.sku];
-            const cost = productIndex.purchase_price * item.quantity
+            const cost = product.purchase_price * item.quantity
             const revenue = options.calculateRevenue({ 
                 discount: item.discount,
                 sale_price: item.sale_price,
