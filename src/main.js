@@ -81,7 +81,7 @@ function analyzeSalesData(data, options) {
             if (!seller.products_sold[item.sku]) {
                 seller.products_sold[item.sku] = 0;
             }
-            seller.products_sold += item.total_amount
+            seller.products_sold[item.sku] += item.quantity
         });
     });
 
